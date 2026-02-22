@@ -15,7 +15,7 @@ export async function POST() {
   try {
     const { data, error } = await getResend().emails.send({
       from: "Bison & Bird <onboarding@resend.dev>",
-      to: user.email!,
+      to: "ryanh@teambisonandbird.com",
       subject: "Bison & Bird — Test Email",
       html: `<h2>It works!</h2><p>This test email was sent from your Bison &amp; Bird starter app via Resend.</p><p>User: ${user.email}</p><p>Sent at: ${new Date().toISOString()}</p>`,
     });
