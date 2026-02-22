@@ -33,7 +33,8 @@ export default async function Home() {
       const balance = await getStripe().balance.retrieve();
       stripeStatus = balance.object === "balance" ? "connected" : "error";
     }
-  } catch {
+  } catch (e) {
+    console.error("Stripe status check error:", e);
     stripeStatus = process.env.STRIPE_SECRET_KEY ? "error" : "pending";
   }
 
