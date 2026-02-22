@@ -317,6 +317,20 @@ confirmed working at a live Vercel URL.
                                                  (RESEND_API_KEY). Shows
                                                  "Connected" at production URL.*
 
+  Shadcn/UI initialized      ✅ Confirmed       *Shadcn/UI v3 (New York style,
+                                                 neutral base color, CSS variables).
+                                                 Tailwind v4 integration.
+                                                 Core components installed: Button,
+                                                 Card, Input, Form, Dialog, Table,
+                                                 Label, Textarea. Dependencies:
+                                                 radix-ui, class-variance-authority,
+                                                 clsx, tailwind-merge, lucide-react,
+                                                 react-hook-form, zod. Folder
+                                                 structure: src/components/ui/,
+                                                 src/hooks/, src/types/. SPEC.md
+                                                 and PROGRESS.md templates created.
+                                                 README, .env.example updated.*
+
   Mobile (Expo) app building ⬜ Not Started     *Run on simulator*
   -------------------------- ------------------ -------------------------
 
@@ -463,4 +477,28 @@ architecture here.
                                                 (ANTHROPIC_API_KEY,
                                                 RESEND_API_KEY). Both show
                                                 "Connected" at production URL.*
+
+  February 22, 2026          Session 2G         *Shadcn/UI + starter template
+                                                finalization. Shadcn/UI v3
+                                                initialized (New York style,
+                                                neutral base, CSS variables,
+                                                Tailwind v4). Core components
+                                                installed: Button, Card, Input,
+                                                Form, Dialog, Table, Label,
+                                                Textarea. Dependencies added:
+                                                radix-ui, class-variance-authority,
+                                                clsx, tailwind-merge, lucide-react,
+                                                react-hook-form, zod. Folder
+                                                structure established:
+                                                src/components/ui/, src/hooks/,
+                                                src/types/. cn() utility at
+                                                src/lib/utils.ts. SPEC.template.md
+                                                and PROGRESS.template.md created
+                                                for new products. .env.example
+                                                updated with descriptions and
+                                                source links. README rewritten
+                                                as starter template documentation.
+                                                Starter template is now
+                                                production-ready (web only —
+                                                mobile/Expo deferred).*
   -------------------------- ------------------ -------------------------

@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bison & Bird Starter
 
-## Getting Started
+Production-ready full-stack starter template for Bison & Bird projects. Clone this repo to begin any new product.
 
-First, run the development server:
+## Stack
+
+- **Frontend:** Next.js 16 (App Router) + TypeScript + Tailwind CSS v4 + Shadcn/UI (New York)
+- **Backend:** Supabase (PostgreSQL, Auth, Storage, Realtime)
+- **Payments:** Stripe (Checkout Sessions)
+- **AI:** Anthropic API (Claude) — server-side only
+- **Email:** Resend (transactional)
+- **Deployment:** Vercel (auto-deploy from GitHub)
+- **DNS:** Cloudflare
+
+## Quick Start
 
 ```bash
+# 1. Clone the starter
+git clone https://github.com/Bison-Bird-Ryan/bison-bird-starter.git my-project
+cd my-project
+
+# 2. Install dependencies
+npm install
+
+# 3. Set up environment variables
+cp .env.example .env.local
+# Fill in your values (see .env.example for where to find each key)
+
+# 4. Run the dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the validation dashboard.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+  app/                    # Next.js App Router pages and layouts
+    (auth)/               # Auth pages (login, signup) + server actions
+    api/                  # API routes (checkout, ai, send-email)
+    checkout/             # Stripe checkout success/cancel pages
+    dashboard/            # Protected dashboard page
+    layout.tsx            # Root layout
+    page.tsx              # Home / validation dashboard
+    globals.css           # Tailwind + Shadcn CSS variables
+  components/
+    ui/                   # Shadcn/UI components (button, card, input, etc.)
+  hooks/                  # Custom React hooks
+  lib/                    # Shared utilities and service clients
+    supabase/             # Supabase server + browser clients
+    anthropic.ts          # Anthropic API client
+    resend.ts             # Resend email client
+    stripe.ts             # Stripe client
+    utils.ts              # cn() utility for Tailwind class merging
+  types/                  # Shared TypeScript type definitions
+```
 
-## Learn More
+## What's Included
 
-To learn more about Next.js, take a look at the following resources:
+| Feature | Status | Details |
+|---|---|---|
+| Next.js + Vercel deploy | Ready | Auto-deploys from `main` branch |
+| Supabase connection | Ready | Server + browser clients, env vars |
+| Auth (email/password) | Ready | Signup, login, logout, middleware protection |
+| Database CRUD | Ready | Notes table with RLS, server actions |
+| Stripe checkout | Ready | Checkout Sessions, success/cancel pages |
+| Anthropic API | Ready | Server-side Claude calls, auth-protected |
+| Resend email | Ready | Transactional email, auth-protected |
+| Shadcn/UI | Ready | Button, Card, Input, Form, Dialog, Table, Label, Textarea |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Starting a New Product
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Clone this repo with a new name
+2. Create a new GitHub repo and push
+3. Copy `SPEC.template.md` to `SPEC.md` and fill in product details
+4. Copy `PROGRESS.template.md` to `PROGRESS.md`
+5. Create cloud resources (Supabase project, Vercel project, Stripe products)
+6. Set environment variables in Vercel
+7. Connect Vercel to the new GitHub repo
+8. Begin building
 
-## Deploy on Vercel
+## Session Workflow
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Every development session follows this pattern:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Open project in VS Code
+2. Claude Code reads `SPEC.md` and `PROGRESS.md`
+3. State the single task for this session
+4. Claude Code executes the task
+5. Confirm it works in production (not locally)
+6. Claude Code updates `SPEC.md` and `PROGRESS.md`
+7. Session ends
+
+## Environment Variables
+
+See [`.env.example`](.env.example) for all required variables with descriptions and links to where each key is found.
+
+## License
+
+Private — Bison & Bird internal use only.
