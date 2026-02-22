@@ -275,8 +275,10 @@ confirmed working at a live Vercel URL.
                                                 to /login when unauthenticated.
                                                 Verified at production URL.*
 
-  Database read/write        ⬜ Not Started     *Insert and fetch a test
-  confirmed                                     record*
+  Database read/write        ✅ Confirmed       *Notes table with RLS.
+  confirmed                                     Server actions for insert,
+                                                delete. Dashboard CRUD UI.
+                                                Verified at production URL.*
 
   Stripe test payment        ⬜ Not Started     *Use Stripe test card*
   completing
@@ -359,4 +361,17 @@ architecture here.
                                                 updated with auth status row
                                                 and navigation links. All
                                                 verified at production URL.*
+
+  February 21, 2026          Session 2D         *Database CRUD confirmed.
+                                                Notes table created in
+                                                Supabase with RLS policies
+                                                (users read/insert/delete
+                                                own notes only). Server
+                                                actions for add and delete.
+                                                Dashboard updated with CRUD
+                                                UI (add note, list notes,
+                                                delete note). Home page
+                                                updated with Database CRUD
+                                                status row. All verified
+                                                at production URL.*
   -------------------------- ------------------ -------------------------
