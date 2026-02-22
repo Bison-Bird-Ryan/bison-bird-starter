@@ -408,4 +408,22 @@ architecture here.
                                                 NEXT_PUBLIC_SITE_URL). Stripe
                                                 shows "Connected" at production
                                                 URL.*
+
+  February 22, 2026          Session 2E fix     *Stripe checkout redirect
+                                                fixed. NEXT_PUBLIC_SITE_URL
+                                                env var had trailing newline
+                                                causing Stripe to reject
+                                                success/cancel URLs as
+                                                invalid (same root cause as
+                                                earlier STRIPE_SECRET_KEY
+                                                fix). Cleaned env var via
+                                                printf pipe. Added error
+                                                state to CheckoutButton and
+                                                try/catch to checkout API
+                                                route. Test payment completed
+                                                end-to-end at production URL:
+                                                button → Stripe hosted
+                                                checkout → payment → success
+                                                page. Transaction visible in
+                                                Stripe sandbox.*
   -------------------------- ------------------ -------------------------
