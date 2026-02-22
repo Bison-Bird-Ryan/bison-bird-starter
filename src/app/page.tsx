@@ -1,16 +1,20 @@
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function Home() {
   let supabaseConnected = false;
+  let user = null;
 
   try {
     const supabase = await createClient();
-    // getSession() is a lightweight call that proves we can reach Supabase
-    const { error } = await supabase.auth.getSession();
-    supabaseConnected = !error;
+    const { data, error } = await supabase.auth.getUser();
+    supabaseConnected = !error || data?.user !== null;
+    user = data?.user ?? null;
   } catch {
     supabaseConnected = false;
   }
+
+  const authStatus = user ? "connected" : "pending";
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
@@ -30,9 +34,39 @@ export default async function Home() {
             label="Supabase"
             status={supabaseConnected ? "connected" : "error"}
           />
+          <StatusRow
+            label="Auth (signup + login)"
+            status={authStatus}
+          />
           <StatusRow label="Stripe" status="pending" />
           <StatusRow label="Anthropic API" status="pending" />
           <StatusRow label="Resend Email" status="pending" />
+        </div>
+
+        <div className="flex gap-3">
+          {user ? (
+            <Link
+              href="/dashboard"
+              className="rounded-lg bg-zinc-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
+            >
+              Go to Dashboard
+            </Link>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="rounded-lg bg-zinc-900 px-4 py-2.5 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
+              >
+                Log in
+              </Link>
+              <Link
+                href="/signup"
+                className="rounded-lg border border-zinc-300 bg-white px-4 py-2.5 text-sm font-medium text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800"
+              >
+                Sign up
+              </Link>
+            </>
+          )}
         </div>
       </main>
     </div>
