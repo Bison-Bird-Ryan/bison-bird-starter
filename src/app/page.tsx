@@ -4,12 +4,24 @@ import { createClient } from "@/lib/supabase/server";
 export default async function Home() {
   let supabaseConnected = false;
   let user = null;
+  let dbCrudStatus: "connected" | "pending" | "error" = "pending";
 
   try {
     const supabase = await createClient();
     const { data, error } = await supabase.auth.getUser();
     supabaseConnected = !error || data?.user !== null;
     user = data?.user ?? null;
+
+    if (user) {
+      const { count, error: countError } = await supabase
+        .from("notes")
+        .select("*", { count: "exact", head: true });
+      if (countError) {
+        dbCrudStatus = "error";
+      } else {
+        dbCrudStatus = (count ?? 0) > 0 ? "connected" : "pending";
+      }
+    }
   } catch {
     supabaseConnected = false;
   }
@@ -37,6 +49,10 @@ export default async function Home() {
           <StatusRow
             label="Auth (signup + login)"
             status={authStatus}
+          />
+          <StatusRow
+            label="Database CRUD"
+            status={dbCrudStatus}
           />
           <StatusRow label="Stripe" status="pending" />
           <StatusRow label="Anthropic API" status="pending" />
