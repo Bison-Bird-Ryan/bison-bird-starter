@@ -266,8 +266,14 @@ confirmed working at a live Vercel URL.
                                                 Live connection verified
                                                 at production URL.*
 
-  User signup + login        ⬜ Not Started     *Test with real email*
-  working
+  User signup + login        ✅ Confirmed       *Email/password auth with
+  working                                       Supabase Auth. Server actions
+                                                for login, signup, logout.
+                                                Middleware handles session
+                                                refresh + route protection.
+                                                /dashboard protected, redirects
+                                                to /login when unauthenticated.
+                                                Verified at production URL.*
 
   Database read/write        ⬜ Not Started     *Insert and fetch a test
   confirmed                                     record*
@@ -336,4 +342,21 @@ architecture here.
                                                 showing live connection status.
                                                 Supabase shows "Connected" at
                                                 bison-bird-starter.vercel.app.*
+
+  February 21, 2026          Session 2C         *Auth implementation complete.
+                                                Email/password signup, login,
+                                                logout via Supabase Auth server
+                                                actions. Login + signup pages
+                                                with error/success messaging.
+                                                Auth callback route for email
+                                                confirmation. Middleware for
+                                                session refresh and route
+                                                protection (/dashboard →
+                                                /login redirect, /login →
+                                                /dashboard redirect when
+                                                authenticated). Protected
+                                                dashboard page. Home page
+                                                updated with auth status row
+                                                and navigation links. All
+                                                verified at production URL.*
   -------------------------- ------------------ -------------------------
