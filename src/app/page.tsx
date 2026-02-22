@@ -29,8 +29,10 @@ export default async function Home() {
   }
 
   try {
-    const payments = await getStripe().paymentIntents.list({ limit: 1 });
-    stripeStatus = payments.data.length > 0 ? "connected" : "pending";
+    if (process.env.STRIPE_SECRET_KEY) {
+      const account = await getStripe().accounts.retrieve();
+      stripeStatus = account.id ? "connected" : "error";
+    }
   } catch {
     stripeStatus = process.env.STRIPE_SECRET_KEY ? "error" : "pending";
   }
