@@ -258,8 +258,13 @@ confirmed working at a live Vercel URL.
 
   Next.js deployed to Vercel ✅ Confirmed       *https://bison-bird-starter.vercel.app*
 
-  Supabase project connected ⬜ Not Started     *Via environment
-                                                variables*
+  Supabase project connected ✅ Confirmed       *@supabase/supabase-js +
+                                                @supabase/ssr installed.
+                                                Server & browser clients
+                                                in src/lib/supabase/.
+                                                Env vars set on Vercel.
+                                                Live connection verified
+                                                at production URL.*
 
   User signup + login        ⬜ Not Started     *Test with real email*
   working
@@ -319,4 +324,16 @@ architecture here.
                                                 .vercel.app. GitHub auto-deploy
                                                 connected. SPEC.md added to
                                                 repo.*
+
+  February 21, 2026          Session 2B         *Supabase connected to starter.
+                                                @supabase/supabase-js + @supabase/ssr
+                                                installed. Server and browser client
+                                                utilities created (src/lib/supabase/).
+                                                Env vars (NEXT_PUBLIC_SUPABASE_URL,
+                                                NEXT_PUBLIC_SUPABASE_ANON_KEY) set on
+                                                Vercel for all environments. Home page
+                                                replaced with validation dashboard
+                                                showing live connection status.
+                                                Supabase shows "Connected" at
+                                                bison-bird-starter.vercel.app.*
   -------------------------- ------------------ -------------------------
