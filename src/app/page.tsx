@@ -30,8 +30,8 @@ export default async function Home() {
 
   try {
     if (process.env.STRIPE_SECRET_KEY) {
-      const account = await getStripe().accounts.retrieve();
-      stripeStatus = account.id ? "connected" : "error";
+      const balance = await getStripe().balance.retrieve();
+      stripeStatus = balance.object === "balance" ? "connected" : "error";
     }
   } catch {
     stripeStatus = process.env.STRIPE_SECRET_KEY ? "error" : "pending";
