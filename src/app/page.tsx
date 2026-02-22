@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { getStripe } from "@/lib/stripe";
 
 export default async function Home() {
   let supabaseConnected = false;
   let user = null;
   let dbCrudStatus: "connected" | "pending" | "error" = "pending";
+  let stripeStatus: "connected" | "pending" | "error" = "pending";
 
   try {
     const supabase = await createClient();
@@ -24,6 +26,13 @@ export default async function Home() {
     }
   } catch {
     supabaseConnected = false;
+  }
+
+  try {
+    const payments = await getStripe().paymentIntents.list({ limit: 1 });
+    stripeStatus = payments.data.length > 0 ? "connected" : "pending";
+  } catch {
+    stripeStatus = process.env.STRIPE_SECRET_KEY ? "error" : "pending";
   }
 
   const authStatus = user ? "connected" : "pending";
@@ -54,7 +63,7 @@ export default async function Home() {
             label="Database CRUD"
             status={dbCrudStatus}
           />
-          <StatusRow label="Stripe" status="pending" />
+          <StatusRow label="Stripe" status={stripeStatus} />
           <StatusRow label="Anthropic API" status="pending" />
           <StatusRow label="Resend Email" status="pending" />
         </div>
