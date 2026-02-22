@@ -296,10 +296,26 @@ confirmed working at a live Vercel URL.
                                                  4242 4242 4242 4242 to
                                                  complete payment.*
 
-  Anthropic API call         ⬜ Not Started     *Server-side route only*
-  returning
+  Anthropic API call         ✅ Confirmed       *@anthropic-ai/sdk installed.
+  returning                                      Lazy-initialized client
+                                                 (src/lib/anthropic.ts).
+                                                 Auth-protected API route
+                                                 (src/app/api/ai/). Dashboard
+                                                 test button sends prompt to
+                                                 Claude. Env var set on Vercel
+                                                 (ANTHROPIC_API_KEY). Shows
+                                                 "Connected" at production URL.*
 
-  Resend email delivering    ⬜ Not Started     *Auth email received*
+  Resend email delivering    ✅ Confirmed       *resend npm package installed.
+                                                 Lazy-initialized client
+                                                 (src/lib/resend.ts).
+                                                 Auth-protected API route
+                                                 (src/app/api/send-email/).
+                                                 Dashboard test button sends
+                                                 email to logged-in user.
+                                                 Env var set on Vercel
+                                                 (RESEND_API_KEY). Shows
+                                                 "Connected" at production URL.*
 
   Mobile (Expo) app building ⬜ Not Started     *Run on simulator*
   -------------------------- ------------------ -------------------------
@@ -426,4 +442,25 @@ architecture here.
                                                 checkout → payment → success
                                                 page. Transaction visible in
                                                 Stripe sandbox.*
+
+  February 22, 2026          Session 2F         *Anthropic API + Resend Email
+                                                integrated. @anthropic-ai/sdk
+                                                and resend packages installed.
+                                                Lazy-initialized clients
+                                                (src/lib/anthropic.ts,
+                                                src/lib/resend.ts) matching
+                                                existing stripe.ts pattern.
+                                                Auth-protected API routes
+                                                (src/app/api/ai/,
+                                                src/app/api/send-email/).
+                                                Dashboard updated with test
+                                                buttons for both services.
+                                                Home page validation dashboard
+                                                shows dynamic status checks
+                                                for Anthropic (messages.create)
+                                                and Resend (domains.list).
+                                                Env vars set on Vercel
+                                                (ANTHROPIC_API_KEY,
+                                                RESEND_API_KEY). Both show
+                                                "Connected" at production URL.*
   -------------------------- ------------------ -------------------------
