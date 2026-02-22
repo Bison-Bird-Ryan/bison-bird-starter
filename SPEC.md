@@ -235,11 +235,15 @@ These values feed into environment variables during Layer 2 setup.
 
   Vercel Team Slug           bison-and-bird
 
-  Stripe Account ID          acct_1OszjZFPVStIkjOU
+  Stripe Account ID          acct_1T3RXGFI9pDC8lEt (sandbox)
 
-  Stripe Mode                Test (switch to live per product launch)
+  Stripe Mode                Sandbox (switch to live per product launch)
 
-  Stripe Dashboard           dashboard.stripe.com/acct_1OszjZFPVStIkjOU
+  Stripe Test Product ID     prod_U1UcJvY2x8JMcU
+
+  Stripe Test Price ID       price_1T3RdEFI9pDC8lEtLv7ThtJo ($10.00 USD)
+
+  Stripe Dashboard           dashboard.stripe.com
 
   GitHub Repo                github.com/Bison-Bird-Ryan/bison-bird-starter
 
@@ -280,8 +284,17 @@ confirmed working at a live Vercel URL.
                                                 delete. Dashboard CRUD UI.
                                                 Verified at production URL.*
 
-  Stripe test payment        ⬜ Not Started     *Use Stripe test card*
-  completing
+  Stripe test payment        ✅ Confirmed       *Stripe SDK integrated.
+  completing                                     Checkout API route creates
+                                                 Stripe Checkout Sessions.
+                                                 Dashboard has checkout button
+                                                 with test card instructions.
+                                                 Success + cancel pages handle
+                                                 redirect. Stripe shows
+                                                 "Connected" on validation
+                                                 dashboard. Use test card
+                                                 4242 4242 4242 4242 to
+                                                 complete payment.*
 
   Anthropic API call         ⬜ Not Started     *Server-side route only*
   returning
@@ -374,4 +387,25 @@ architecture here.
                                                 updated with Database CRUD
                                                 status row. All verified
                                                 at production URL.*
+
+  February 21, 2026          Session 2E         *Stripe integration complete.
+                                                stripe npm package installed.
+                                                Lazy-initialized Stripe client
+                                                (src/lib/stripe.ts) avoids
+                                                build-time errors. Checkout API
+                                                route (src/app/api/checkout/)
+                                                creates Stripe Checkout Sessions
+                                                requiring auth. Dashboard updated
+                                                with checkout button + test card
+                                                instructions. Success + cancel
+                                                pages created. Home page shows
+                                                dynamic Stripe connection status
+                                                via balance.retrieve(). Sandbox
+                                                product ($10 Starter Test Product)
+                                                and price created. Env vars set
+                                                on Vercel (STRIPE_SECRET_KEY,
+                                                STRIPE_TEST_PRICE_ID,
+                                                NEXT_PUBLIC_SITE_URL). Stripe
+                                                shows "Connected" at production
+                                                URL.*
   -------------------------- ------------------ -------------------------
