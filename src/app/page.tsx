@@ -1,12 +1,16 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { getStripe } from "@/lib/stripe";
+import { getAnthropic } from "@/lib/anthropic";
+import { getResend } from "@/lib/resend";
 
 export default async function Home() {
   let supabaseConnected = false;
   let user = null;
   let dbCrudStatus: "connected" | "pending" | "error" = "pending";
   let stripeStatus: "connected" | "pending" | "error" = "pending";
+  let anthropicStatus: "connected" | "pending" | "error" = "pending";
+  let resendStatus: "connected" | "pending" | "error" = "pending";
 
   try {
     const supabase = await createClient();
@@ -35,6 +39,29 @@ export default async function Home() {
     }
   } catch {
     stripeStatus = process.env.STRIPE_SECRET_KEY ? "error" : "pending";
+  }
+
+  try {
+    if (process.env.ANTHROPIC_API_KEY) {
+      const msg = await getAnthropic().messages.create({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 16,
+        messages: [{ role: "user", content: "Say ok" }],
+      });
+      anthropicStatus = msg.id ? "connected" : "error";
+    }
+  } catch {
+    anthropicStatus = process.env.ANTHROPIC_API_KEY ? "error" : "pending";
+  }
+
+  try {
+    if (process.env.RESEND_API_KEY) {
+      const resend = getResend();
+      const { error } = await resend.domains.list();
+      resendStatus = !error ? "connected" : "error";
+    }
+  } catch {
+    resendStatus = process.env.RESEND_API_KEY ? "error" : "pending";
   }
 
   const authStatus = user ? "connected" : "pending";
@@ -66,8 +93,8 @@ export default async function Home() {
             status={dbCrudStatus}
           />
           <StatusRow label="Stripe" status={stripeStatus} />
-          <StatusRow label="Anthropic API" status="pending" />
-          <StatusRow label="Resend Email" status="pending" />
+          <StatusRow label="Anthropic API" status={anthropicStatus} />
+          <StatusRow label="Resend Email" status={resendStatus} />
         </div>
 
         <div className="flex gap-3">
