@@ -12,21 +12,29 @@ export async function POST() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const session = await getStripe().checkout.sessions.create({
-    line_items: [
-      {
-        price: process.env.STRIPE_TEST_PRICE_ID!,
-        quantity: 1,
+  try {
+    const session = await getStripe().checkout.sessions.create({
+      line_items: [
+        {
+          price: process.env.STRIPE_TEST_PRICE_ID!,
+          quantity: 1,
+        },
+      ],
+      mode: "payment",
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/checkout/cancel`,
+      customer_email: user.email,
+      metadata: {
+        user_id: user.id,
       },
-    ],
-    mode: "payment",
-    success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/checkout/cancel`,
-    customer_email: user.email,
-    metadata: {
-      user_id: user.id,
-    },
-  });
+    });
 
-  return NextResponse.json({ url: session.url });
+    return NextResponse.json({ url: session.url });
+  } catch (err) {
+    console.error("Stripe checkout error:", err);
+    return NextResponse.json(
+      { error: "Failed to create checkout session" },
+      { status: 500 }
+    );
+  }
 }
